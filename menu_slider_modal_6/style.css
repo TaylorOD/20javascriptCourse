@@ -15,6 +15,12 @@ body {
   margin: 0;
 }
 
+body.show-nav {
+  /* Width of nav */
+  transform: translateX(200px);
+  transition: transform 0.3s ease;
+}
+
 nav {
   background-color: var(--primary-color);
   border-right: 2px solid rgba(200, 200, 200, 0.1);
@@ -123,6 +129,10 @@ button:focus {
   bottom: 0;
 }
 
+.modal-container.show-modal {
+  display: block;
+}
+
 .modal {
   background-color: #fff;
   border-radius: 5px;
@@ -134,6 +144,8 @@ button:focus {
   transform: translate(-50%, -50%);
   max-width: 100%;
   width: 400px;
+  animation-name: modalopen;
+  animation-duration: var(--modal-duration);
 }
 
 .modal-header {
@@ -163,6 +175,7 @@ button:focus {
 .modal-form .form-input {
   padding: 8px;
   width: 100%;
+  border: #333 1px solid;
 }
 
 .close-btn {
@@ -171,4 +184,14 @@ button:focus {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
