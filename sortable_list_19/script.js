@@ -2,7 +2,7 @@ const draggable_list = document.getElementById('draggable-list');
 const check = document.getElementById('check');
 
 const richestPeople = [
-	'jeff Bezos',
+	'Jeff Bezos',
 	'Bill Gates',
 	'Warren Buffet',
 	'Bernard Arnault',
@@ -21,10 +21,14 @@ let dragStartIndex;
 
 // Insert list items into DOM
 function createList() {
-	[...richestPeople].forEach((person, index) => {
-		const listItem = document.createElement('li');
-		listItem.setAttribute('data-index', index);
-		listItem.innerHTML = `
+	[...richestPeople]
+		.map((person) => ({ value: person, sort: Math.random() }))
+		.sort((personOne, personTwo) => personOne.sort - personTwo.sort)
+		.map((person) => person.value)
+		.forEach((person, index) => {
+			const listItem = document.createElement('li');
+			listItem.setAttribute('data-index', index);
+			listItem.innerHTML = `
     <span class="number">${index + 1}</span>
     <div class="draggable" draggable="true">
       <p class="person-name">${person}</p>
@@ -32,10 +36,10 @@ function createList() {
     </div>
     `;
 
-		listItems.push(listItem);
+			listItems.push(listItem);
 
-		draggable_list.appendChild(listItem);
-	});
+			draggable_list.appendChild(listItem);
+		});
 }
 
 createList();
