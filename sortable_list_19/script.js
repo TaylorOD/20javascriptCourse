@@ -66,12 +66,27 @@ function dragOver(e) {
 	e.preventDefault();
 }
 
+// Swap drag and drop list items
 function swapItems(fromIndex, toIndex) {
 	const itemOne = listItems[fromIndex].querySelector('.draggable');
 	const itemTwo = listItems[toIndex].querySelector('.draggable');
 
 	listItems[fromIndex].appendChild(itemTwo);
 	listItems[toIndex].appendChild(itemOne);
+}
+
+// Check the order of list items on button click
+function checkOrder() {
+	listItems.forEach((item, index) => {
+		const personName = item.querySelector('.draggable').innerText.trim();
+
+		if (personName !== richestPeople[index]) {
+			item.classList.add('wrong');
+		} else {
+			item.classList.remove('wrong');
+			item.classList.add('right');
+		}
+	});
 }
 
 function addEventListeners() {
@@ -89,5 +104,7 @@ function addEventListeners() {
 		item.addEventListener('dragleave', dragLeave);
 	});
 }
+
+check.addEventListener('click', checkOrder);
 
 createList();
